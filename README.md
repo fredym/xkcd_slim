@@ -21,9 +21,9 @@ chronologically one after another.
 
 ### There are a few xkcd viewers out there. Why does the world need another one?
 
-I [wanted](a761783) to start a project to apply a couple of things I've learned
-about web apps development. I also wanted to find out what else I still din't
-know and learn it. Here is the list of things I've discovered:
+I wanted (a761783) to start a project to apply a couple of things I've
+learned about web apps development. I also wanted to find out what else I still
+din't know and learn it. Here is the list of things I've discovered:
 
 * Same origin policy ([SOP])
 * Cross-origin resource sharing ([CORS])
