@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+      $(function(){
+
+        var xkcd_url = "http://xkcd.com/";
+
+        // Get the comic id from the query string.
+        var id = location.search.substring(1);
+
+        // If no id was specified, set it to 1.
+        if ( !id ) {
+          id = 1;
+          location.search = "?1";
+        };
+
+        // Set the navigation buttons
+        $('#back').attr( "href", "index.html?" + ( parseInt(id) - 1 ));
+        $('#next').attr( "href", "index.html?" + ( parseInt(id) + 1 ));
+
+        // Build the YQL query
+        var yql = 'http://query.yahooapis.com/v1/public/yql?format=json&q='
+          + encodeURIComponent('select * from html where url="'
+          + xkcd_url + id + '"');
+
+        // Get the JSON data and populate the page
+        $.getJSON( yql, function( data ) {
+          var content  = data.query.results.body.div[1].div;
+          var title = content[0];
+          var img = content[1].img;
+
+          document.title = "xkcd: " + title.content;
+          $('#original').html( xkcd_url + id + "/" );
+          $('#original').attr( "href", xkcd_url + id + "/" );
+          $('#title').html( title.content );
+          $('#img').attr( "src", "http://" + img.src );
+          $('#tooltip').html( img.title );
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <p>
+      <a id="back" href="#">Back</a> | <a id="next" href="#">Next</a>
+    </p>
+    <p>
+      Original: <a id="original" href="#" target="_blank">original</a>
+    </p>
+    <h1 id="title">Title</h1>
+    <img id="img">
+    <p id="tooltip">Tooltip</p>
+    <small>All the content displayed in this page belons to
+      <a href="http://xkcd.com" target="_blank">http://xkcd.com</a> and is
+      reproduced under the terms of the
+      <a href="http://xkcd.com/license.html" target="_blank">original
+      license</a>.
+    </small>
+  </body>
+</html>
