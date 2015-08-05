@@ -5,6 +5,7 @@
       $(function(){
 
         var xkcd_url = "http://xkcd.com/";
+        var explainxkcd_url = "http://www.explainxkcd.com/wiki/index.php/"
 
         // Get the comic id from the query string.
         var id = location.search.substring(1);
@@ -33,6 +34,8 @@
           document.title = "xkcd: " + title.content;
           $('#original').html( xkcd_url + id + "/" );
           $('#original').attr( "href", xkcd_url + id + "/" );
+          $('#explanation').html( explainxkcd_url + id );
+          $('#explanation').attr( "href", explainxkcd_url + id );
           $('#title').html( title.content );
           $('#img').attr( "src", "http://" + img.src );
           $('#tooltip').html( img.title );
@@ -46,6 +49,9 @@
     </p>
     <p>
       Original: <a id="original" href="#" target="_blank">original</a>
+    </p>
+    <p>
+      Explanation: <a id="explanation" href="#" target="_blank">explanation</a>
     </p>
     <h1 id="title">Title</h1>
     <img id="img">
